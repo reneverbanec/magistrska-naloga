@@ -1,5 +1,18 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+import AuthModal from './AuthModal.vue';
+import { ref } from 'vue';
+
+const isAuthenticated = ref(false);
+const showModal = ref(false);
+
+const toggleModal = () => {
+  showModal.value = !showModal.value;
+};
+
+const handleSignout = () => {
+  console.log('Odjava');
+};
 </script>
 
 <template>
@@ -12,8 +25,22 @@ import { RouterLink } from 'vue-router';
         <RouterLink to="/" class="btn btn-ghost">Strelci</RouterLink>
         <RouterLink to="/" class="btn btn-ghost">Razpored</RouterLink>
         <RouterLink to="/" class="btn btn-ghost">Glasovanje</RouterLink>
-        <button class="btn btn-primary">Login / Signup</button>
+        <button
+          v-if="!isAuthenticated"
+          class="btn btn-secondary"
+          @click="toggleModal"
+        >
+          Prijava
+        </button>
+        <button
+          v-if="isAuthenticated"
+          class="btn btn-secondary"
+          @click="handleSignout()"
+        >
+          Odjava
+        </button>
       </nav>
     </div>
+    <AuthModal :is-open="showModal" @update:is-open="toggleModal" />
   </header>
 </template>

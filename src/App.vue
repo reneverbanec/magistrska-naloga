@@ -1,20 +1,19 @@
 <script setup>
 import Nav from './components/Nav.vue';
-import Card from './components/Card.vue';
+import Footer from './components/Footer.vue';
+import { RouterView } from 'vue-router';
+
+import { ref } from 'vue';
 </script>
 
 <template>
-  <main>
+  <div class="flex flex-col min-h-screen">
     <Nav />
-    <div class="container mx-auto px-6 py-3">
-      <Card>
-        <h2 class="text-xl">Card Title</h2>
-        <p class="text-white-700">
-          This is an example card using a slot to render its content.
-        </p>
-      </Card>
+    <div class="flex-1">
+      <RouterView />
     </div>
-  </main>
+    <Footer />
+  </div>
 </template>
 
 <style scoped></style>
