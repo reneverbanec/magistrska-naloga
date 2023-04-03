@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import AuthModal from './AuthModal.vue';
+import Modal from './Modal.vue';
 import { ref, onMounted } from 'vue';
 import { themeChange } from 'theme-change';
 
@@ -9,11 +10,6 @@ onMounted(() => {
 });
 
 const isAuthenticated = ref(false);
-const showModal = ref(false);
-
-const toggleModal = () => {
-  showModal.value = !showModal.value;
-};
 
 const handleSignout = () => {
   console.log('Odjava');
@@ -40,22 +36,22 @@ const handleSignout = () => {
           data-toggle-theme="lemonade,dark"
           data-act-class="ACTIVECLASS"
         />
-        <button
-          v-if="!isAuthenticated"
+
+        <Modal />
+        <label
+          for="my-modal-3"
           class="btn btn-secondary"
-          @click="toggleModal"
+          v-if="!isAuthenticated"
+          >Prijava</label
         >
-          Prijava
-        </button>
-        <button
-          v-if="isAuthenticated"
+        <label
+          for="my-modal-3"
           class="btn btn-secondary"
           @click="handleSignout()"
+          v-else
+          >Odjava</label
         >
-          Odjava
-        </button>
       </nav>
     </div>
-    <AuthModal :is-open="showModal" @update:is-open="toggleModal" />
   </header>
 </template>
